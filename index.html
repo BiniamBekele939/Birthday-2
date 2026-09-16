@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday My Love! ❤️</title>
+  <style>
+    :root {
+      --primary-color: #ff4b2b;
+      --secondary-color: #ff416c;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at center, #2c1b4d 0%, #0f0c1b 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 10;
+      width: 90%;
+      max-width: 480px;
+    }
+
+    /* Pulse Glow Button */
+    .magic-btn {
+      padding: 20px 40px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 65, 108, 0.6);
+      transition: all 0.4s ease;
+      animation: pulse 2s infinite;
+      outline: none;
+    }
+
+    .magic-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 35px rgba(255, 65, 108, 0.9);
+    }
+
+    /* Main Surprise Card */
+    .card {
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      padding: 30px 25px;
+      border-radius: 200px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    /* Polaroid Photo Frame with 3D Tilt Effect */
+    .polaroid-frame {
+      background: #ffffff;
+      padding: 12px 12px 35px 12px;
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      transform: rotate(-3deg);
+      transition: transform 0.5s ease;
+      margin: 0 auto 25px auto;
+      width: 240px;
+    }
+
+    .polaroid-frame:hover {
+      transform: rotate(0deg) scale(1.03);
+    }
+
+    .polaroid-frame img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 4px;
+      transition: opacity 0.4s ease;
+    }
+
+    .polaroid-caption {
+      color: #333;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+      font-size: 0.95rem;
+      margin-top: 10px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .typed-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      min-height: 80px;
+      margin-bottom: 20px;
+      color: #f0f0f0;
+    }
+
+    /* Interactive Memory Button */
+    .gallery-btn {
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(45deg, #7928ca, #ff0080);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      display: none;
+      margin: 0 auto;
+      box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gallery-btn:hover {
+      transform: translateY(-2deg);
+      box-shadow: 0 8px 20px rgba(255, 0, 128, 0.6);
+    }
+
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      pointer-events: none;
+      animation: float 4s linear infinite;
+      bottom: -30px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 65, 108, 0.6); }
+      50% { transform: scale(1.05); box-shadow: 0 0 35px rgba(255, 65, 108, 0.9); }
+      100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 65, 108, 0.6); }
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.6); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- Custom Audio Element -->
+  <audio id="audioMemo" src="voice-memo.mp3"></audio>
+
+  <div class="container">
+    <!-- Instant Surprise Button -->
+    <button class="magic-btn" id="revealBtn">✨መልካም ልደት ፍቅርዬ ✨</button>
+
+    <!-- Interactive Card -->
+    <div class="card" id="birthdayCard">
+      <!-- Polaroid Photo Frame -->
+      <div class="polaroid-frame" id="polaroid">
+        <img id="galleryImg" src="her-photo.jpg" alt="Our Moment">
+        <div class="polaroid-caption" id="photoCaption">የኔ ንግስት👑</div>
+      </div>
+
+      <h1>Happy Birthday, My Love! 🎂✨</h1>
+      <div class="typed-text" id="typewriter"></div>
+      <button class="gallery-btn" id="nextPhotoBtn">Next Memory 📸</button>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------------------------------------------------
+    // Memory Gallery Data (Photos + Polaroid Captions)
+    // ------------------------------------------------------------------
+    const memoryGallery = [
+      { img: 'her-photo.jpg', caption: 'My Favorite Smile ✨' },
+      { img: 'memory1.jpg', caption: 'Our Favorite Date 💖' },
+      { img: 'memory2.jpg', caption: 'የዘላለም አጋሬ♾️' },
+      { img: 'memory3.jpg', caption: 'በጣም ነው ምውድሽ የኔ ቆንጆ 💞' },
+      { img: 'memory4.jpg', caption: 'Forever & Always 💞' },
+      { img: 'memory5.jpg', caption: 'Forever & Always 💞' },
+      { img: 'memory7.jpg', caption: 'ሕይወቴን ያበራሽው ፀሐይ ☀️ 🌹' },
+      { img: 'memory8.jpg', caption:  'የልቤ ባለቤት🔐' },
+      { img: 'memory9.jpg', caption: 'የሁልጊዜ ምርጫዬ💞' },
+      { img: 'memory10.jpg', caption: 'I love you 💞' },
+      { img: 'memory11.jpg', caption: 'I love you to the moon and back 💞' },
+      { img: 'memory12.jpg', caption: 'You’re my person💞' },
+      { img: 'memory13.jpg', caption: 'You’re the best💞' },
+      { img: 'memory14.jpg', caption: 'My safe place 💞' },
+      { img: 'memory15.jpg', caption: 'You mean the world to me 💞' },
+      { img: 'memory16.jpg', caption: 'To the infinity and beyond 💞' },
+      { img: 'memory17.jpg', caption: 'I love you 💞' },
+      { img: 'memory18.jpg', caption: 'Today 💞' },
+      { img: 'memory19.jpg', caption: 'I love you 💞' },
+      { img: 'memory20.jpg', caption: 'Tomorrow💞' },
+      { img: 'memory21.jpg', caption: 'I will never stop loving you 💞' },
+      { img: 'memory22.jpg', caption: 'i love you ነው ማደርግሽ💞' },
+      { img: 'memory23.jpg', caption: ' የኔ ቆንጆ 💞' },
+      { img: 'memory24.jpg', caption: ' Youre my presnt and future💞' },
+      { img: 'memory25.jpg', caption: ' I love you more than meat 😄 ' },
+      { img: 'memory26.jpg', caption: ' Every day with you feels special.💞' },
+      { img: 'memory27.jpg', caption: ' My heart chose you and never looked back💞' },
+      { img: 'memory28.jpg', caption: 'Even when you drive me crazy, I still love you 💞' },
+      { img: 'memory29.jpg', caption: ' Forever yours + Forever mine 💞' },
+      { img: 'memory30.jpg', caption: ' My answered prayer. 🙏✨' },
+      { img: 'memory31.jpg', caption: ' A blessing I count every day. 🕊️' },
+      { img: 'memory32.jpg', caption: ' Sent from above. 💫' },
+      { img: 'memory33.jpg', caption: ' My God-given peace. 🤍' },
+      { img: 'memory34.jpg', caption: ' My favorite blessing. 💫' },
+      { img: 'memory35.jpg', caption: ' My happy place' },
+      { img: 'memory36.jpg', caption: ' I love you today, tomorrow, forever!💞' }
+    ];
+
+    let currentMemoryIndex = 0;
+
+    // Love Letter Text for Typing Effect
+    const loveLetter = "I love you so much, my love! You bring so much joy, warmth, and magic into my life every single day. Happy Birthday to the most amazing person in my world! ❤️";
+
+    // DOM Elements
+    const revealBtn = document.getElementById('revealBtn');
+    const card = document.getElementById('birthdayCard');
+    const audio = document.getElementById('audioMemo');
+    const typewriter = document.getElementById('typewriter');
+    const nextBtn = document.getElementById('nextPhotoBtn');
+    const galleryImg = document.getElementById('galleryImg');
+    const photoCaption = document.getElementById('photoCaption');
+    const polaroid = document.getElementById('polaroid');
+
+    // Reveal Button Event
+    revealBtn.addEventListener('click', () => {
+      revealBtn.style.display = 'none';
+      card.style.display = 'block';
+
+      // Play Voice Memo / Audio
+      audio.play().catch(err => console.log("Audio playback blocked by browser"));
+
+      // Start Floating Particles & Typing Effect
+      startParticleShower();
+      startTypingEffect(loveLetter, 0);
+    });
+
+    // Handwritten Typing Effect
+    function startTypingEffect(text, index) {
+      if (index < text.length) {
+        typewriter.innerHTML += text.charAt(index);
+        setTimeout(() => startTypingEffect(text, index + 1), 45);
+      } else {
+        nextBtn.style.display = 'inline-block'; // Show photo button after typing finishes
+      }
+    }
+
+    // Photo Transition (Polaroid Flip + Rotation Change)
+    nextBtn.addEventListener('click', () => {
+      currentMemoryIndex = (currentMemoryIndex + 1) % memoryGallery.length;
+      
+      // Random tilt angle between -6 and +6 degrees for polaroid effect
+      const randomRotation = (Math.random() * 12 - 6).toFixed(1);
+
+      galleryImg.style.opacity = '0';
+      setTimeout(() => {
+        galleryImg.src = memoryGallery[currentMemoryIndex].img;
+        photoCaption.innerText = memoryGallery[currentMemoryIndex].caption;
+        polaroid.style.transform = `rotate(${randomRotation}deg)`;
+        galleryImg.style.opacity = '1';
+      }, 300);
+    });
+
+    // Particle Generator (Hearts and Stars)
+    function startParticleShower() {
+      const symbols = ['❤️', '💖', '✨', '🌸', '💕'];
+      for (let i = 0; i < 45; i++) {
+        setTimeout(() => {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+          particle.style.left = Math.random() * 100 + 'vw';
+          particle.style.animationDuration = (Math.random() * 2 + 3) + 's';
+          particle.style.fontSize = (Math.random() * 18 + 14) + 'px';
+          document.body.appendChild(particle);
+
+          setTimeout(() => particle.remove(), 5000);
+        }, i * 120);
+      }
+    }
+  </script>
+</body>
+</html>
